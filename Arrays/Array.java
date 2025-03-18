@@ -251,28 +251,45 @@ public class Array {
         // return len;
 
         // Better 
-        HashMap<Integer, Integer> map = new HashMap<>();
+        // HashMap<Integer, Integer> map = new HashMap<>();
+        // int sum = 0;
+        // int len = Integer.MIN_VALUE;
+        // for (int i = 0; i < arr.length; i++) {
+        //     sum += arr[i];
+        //     if (sum == k) {
+        //         len = Integer.max(len, i);
+        //     }
+        //     if (map.containsKey(sum-k)) {
+        //         len = Integer.max(len, i-map.get(sum-k));
+        //     }
+        //     if (map.containsKey(sum) == false) {
+        //         map.put(sum, i);
+        //     }
+        // }
+        // return len;
+
+        // optimal
+        int j = 0;
         int sum = 0;
         int len = Integer.MIN_VALUE;
         for (int i = 0; i < arr.length; i++) {
             sum += arr[i];
             if (sum == k) {
-                len = Integer.max(len, i);
+                len = Integer.max(len, (i-j)+1);
             }
-            if (map.containsKey(sum-k)) {
-                len = Integer.max(len, i-map.get(sum-k));
-            }
-            if (map.containsKey(sum) == false) {
-                map.put(sum, i);
+            while (sum > k) {
+                sum = sum-arr[j];
+                j++;
             }
         }
         return len;
     }
+
     public static void main(String[] args) {
         // int[] arr1 = {5,6,7,9};
         // int[] arr = {0,0,1,1,0,1,1,1,0,1,1};
         int arr[] = {1,2,3,1,1,1,4,2,3};
-        int k = 6;
+        int k = 5;
         // int k = 5;
         // System.out.println(secondLargestElement(arr));  
         // System.out.println(secondSamllestElement(arr)); 
