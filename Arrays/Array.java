@@ -1,5 +1,6 @@
 package Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 // import java.util.HashSet;
 import java.util.HashMap;
 
@@ -284,7 +285,45 @@ public class Array {
         }
         return len;
     }
+    // 2 sum problem 
+    public static boolean twoSum(int[] arr, int target) {
+        // Brute
+        // for (int i = 0; i < arr.length; i++) {
+        //     for (int j = i+1; j < arr.length; j++) {
+        //         if (arr[i]+arr[j] == target) {
+        //             return true;
+        //         }
+        //     }
+        // }
+        // return false;
 
+        // Better
+        // HashMap<Integer, Integer> map = new HashMap<>();
+        // for (int i = 0; i < arr.length; i++) {
+        //     int rem = target - arr[i];
+        //     if (map.containsKey(rem)) {
+        //         return true;
+        //     }
+        //     map.put(arr[i], i);
+        // }
+        // return false;
+
+        // optimal
+        Arrays.sort(arr);
+        int i = 0;
+        int j = arr.length-1;
+        while (i<j) {
+            int total = arr[i]+arr[j];
+            if (total == target) {
+                return true;
+            }else if (total<target) {
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         // int[] arr1 = {5,6,7,9};
         // int[] arr = {0,0,1,1,0,1,1,1,0,1,1};
