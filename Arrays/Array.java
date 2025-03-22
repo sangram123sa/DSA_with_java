@@ -324,11 +324,37 @@ public class Array {
         }
         return false;
     }
+    // swap in array
+    public static void swap(int position1, int position2, int[] arr) {
+        int temp = arr[position1];
+        arr[position1] = arr[position2];
+        arr[position2] = temp;
+    }
+    // Sorted the array filled with 0's, 1's and 2(Dutch national flag allgorithm)
+    public static int[] sortArrayWithZeroOneAndTwo(int[] arr) {
+        int low = 0;
+        int mid = 0;
+        int high = arr.length-1;
+        while (mid<=high) {
+            if (arr[mid] == 0) {
+                swap(low, mid, arr);
+                low++;
+                mid++;
+            }else if (arr[mid] == 1) {
+                mid++;
+            }else if (arr[mid] == 2) {
+                swap(mid, high, arr);
+                high--;
+            }
+        }
+        return arr;
+    }
     public static void main(String[] args) {
         // int[] arr1 = {5,6,7,9};
         // int[] arr = {0,0,1,1,0,1,1,1,0,1,1};
-        int arr[] = {1,2,3,1,1,1,4,2,3};
-        int k = 5;
+        // int arr[] = {1,2,3,1,1,1,4,2,3};
+        int arr[] = {0,1,1,0,1,2,1,2,0,0,0};
+        // int k = 5;
         // int k = 5;
         // System.out.println(secondLargestElement(arr));  
         // System.out.println(secondSamllestElement(arr)); 
@@ -341,6 +367,10 @@ public class Array {
         // System.out.println(findMissingNumber(arr, k));
         // System.out.println(maximumConsecutiveOne(arr));
         // System.out.println(findTheElementThatAppearOnce(arr));
-        System.out.println(longestSubarraySumK(arr, k));
+        // System.out.println(longestSubarraySumK(arr, k));
+        // System.out.println(twoSum(arr, k));
+        for (int i : sortArrayWithZeroOneAndTwo(arr)) {
+            System.out.print(i+" ");
+        }
     }
 }
