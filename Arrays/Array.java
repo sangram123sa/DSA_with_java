@@ -349,11 +349,58 @@ public class Array {
         }
         return arr;
     }
+    // Mejority element inside an Array(Moore's voting algorithm)
+    public static int mejorityElement(int[] arr) {
+        // Better 
+        // Map<Integer, Integer> map = new HashMap<>();
+        // for (int i = 0; i < arr.length; i++) {
+        //     if (map.containsKey(arr[i])) {
+        //         int value = map.get(arr[i]);
+        //         value++;
+        //         map.put(arr[i],value);
+        //     }else{
+        //         map.put(arr[i], 1);
+        //     }
+        // }
+        // for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+        //     if(entry.getValue()>arr.length/2){
+        //         return entry.getKey();
+        //     }
+        // }
+        // return -1;
+
+        // Optimal 
+        int cnt = 0;
+        int ele = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (cnt == 0) {
+                ele = arr[i];
+                cnt++;
+            }else if (arr[i] == ele) {
+                cnt++;
+            }else if (arr[i] != ele) {
+                cnt--;
+            }
+        }
+        if (cnt > 0) {
+            cnt = 0;
+            for (int i = 0; i < arr.length; i++) {
+                if (ele == arr[i]) {
+                    cnt++;
+                }
+            }
+            if (cnt > arr.length/2) {
+                return ele;
+            }
+        }
+        return -1;
+    }
     public static void main(String[] args) {
         // int[] arr1 = {5,6,7,9};
         // int[] arr = {0,0,1,1,0,1,1,1,0,1,1};
         // int arr[] = {1,2,3,1,1,1,4,2,3};
-        int arr[] = {0,1,1,0,1,2,1,2,0,0,0};
+        // int arr[] = {0,1,1,0,1,2,1,2,0,0,0};
+        int arr[] = {2,2,3,3,1,4,4};
         // int k = 5;
         // int k = 5;
         // System.out.println(secondLargestElement(arr));  
@@ -369,8 +416,9 @@ public class Array {
         // System.out.println(findTheElementThatAppearOnce(arr));
         // System.out.println(longestSubarraySumK(arr, k));
         // System.out.println(twoSum(arr, k));
-        for (int i : sortArrayWithZeroOneAndTwo(arr)) {
-            System.out.print(i+" ");
-        }
+        // for (int i : sortArrayWithZeroOneAndTwo(arr)) {
+        //     System.out.print(i+" ");
+        // }
+        System.out.println(mejorityElement(arr));
     }
 }
