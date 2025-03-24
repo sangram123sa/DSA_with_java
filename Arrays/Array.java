@@ -395,12 +395,34 @@ public class Array {
         }
         return -1;
     }
+    // Maximum sub-array sum(Kadan's Algorithm)
+    public static int maxSubarraySum(int[] arr) {
+        int sum  = 0;
+        int max = Integer.MIN_VALUE;
+        int ansStart = -1, ansEnd = -1, start = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (sum == 0) {start = i;}
+            sum += arr[i];
+            if (max<sum) {
+                max = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        System.out.println(ansStart);
+        System.out.println(ansEnd);
+        return max;
+    }
     public static void main(String[] args) {
         // int[] arr1 = {5,6,7,9};
         // int[] arr = {0,0,1,1,0,1,1,1,0,1,1};
         // int arr[] = {1,2,3,1,1,1,4,2,3};
         // int arr[] = {0,1,1,0,1,2,1,2,0,0,0};
-        int arr[] = {2,2,3,3,1,4,4};
+        // int arr[] = {2,2,3,3,1,4,4};
+        int arr[] = {-2,-3,4,-1,-2,1,5,-3};
         // int k = 5;
         // int k = 5;
         // System.out.println(secondLargestElement(arr));  
@@ -419,6 +441,7 @@ public class Array {
         // for (int i : sortArrayWithZeroOneAndTwo(arr)) {
         //     System.out.print(i+" ");
         // }
-        System.out.println(mejorityElement(arr));
+        // System.out.println(mejorityElement(arr));
+        System.out.println("ans "+maxSubarraySum(arr));
     }
 }
