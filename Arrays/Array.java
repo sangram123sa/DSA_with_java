@@ -416,13 +416,74 @@ public class Array {
         System.out.println(ansEnd);
         return max;
     }
+    // Rearrange Array Elements by Sign
+    public static int[] rearrangeArray(int arr[]) {
+        // ArrayList<Integer> positiveList = new ArrayList<>();
+        // ArrayList<Integer> negetiveList = new ArrayList<>();
+        // for (int i = 0; i < arr.length; i++) {
+        //     if(arr[i]>0){
+        //         positiveList.add(arr[i]);
+        //     }else{
+        //         negetiveList.add(arr[i]);
+        //     }
+        // }
+        // int pCnt=0,nCnt = 0;
+        // for (int i = 0; i < arr.length; i++) {
+        //     if (i%2==0) {
+        //         arr[i] = positiveList.get(pCnt);
+        //         pCnt++;
+        //     }else{
+        //         arr[i] = negetiveList.get(nCnt);
+        //         nCnt++;
+        //     }
+        // }
+        // return arr;
+        int[] ans = new int[arr.length];
+        int pos = 0, neg = 1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]>0) {
+                ans[pos] = arr[i];
+                pos = pos+2;
+            }else{
+                ans[neg] = arr[i];
+                neg += 2;
+            }
+        }
+        return ans;
+    }
+    // Next permutation problem
+    public static int[] nextPermutation(int[] arr) {
+        // find the break point
+        int breakingIndex = -1;
+        for (int i = arr.length-2; i >= 0 ; i--) {
+            if (arr[i]< arr[i+1]) {
+                breakingIndex = i;
+                System.out.println(arr[i]);
+                break;
+            }
+        }
+        // if there is not break point then number in its highest form just reverse it and return it.
+        if (breakingIndex == -1) {
+            return reverseArray(arr, 0, arr.length-1);
+        }
+        // find the smallest number that is greater then breakingpoint-th position number and swap it with breakpoint number.
+        for (int i = arr.length-1; i > breakingIndex ; i--) {
+            if (arr[i]>arr[breakingIndex]) {
+                swap(breakingIndex, i, arr);
+                break;
+            }
+        }
+        return reverseArray(arr, breakingIndex+1, arr.length-1);
+    }
     public static void main(String[] args) {
         // int[] arr1 = {5,6,7,9};
         // int[] arr = {0,0,1,1,0,1,1,1,0,1,1};
         // int arr[] = {1,2,3,1,1,1,4,2,3};
         // int arr[] = {0,1,1,0,1,2,1,2,0,0,0};
         // int arr[] = {2,2,3,3,1,4,4};
-        int arr[] = {-2,-3,4,-1,-2,1,5,-3};
+        // int arr[] = {-2,-3,4,-1,-2,1,5,-3};
+        // int arr[] = {3,-2,-4,1,5,-7};
+        int arr[] = {2,1,5,4,3,0,0};
         // int k = 5;
         // int k = 5;
         // System.out.println(secondLargestElement(arr));  
@@ -442,6 +503,12 @@ public class Array {
         //     System.out.print(i+" ");
         // }
         // System.out.println(mejorityElement(arr));
-        System.out.println("ans "+maxSubarraySum(arr));
+        // System.out.println("ans "+maxSubarraySum(arr));
+        // for (int i : rearrangeArray(arr)) {
+        //     System.out.print(i+" ");
+        // }
+        for (int i : nextPermutation(arr)) {
+            System.out.print(i+" ");
+        }
     }
 }
